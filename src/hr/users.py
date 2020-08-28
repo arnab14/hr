@@ -2,6 +2,8 @@ import pwd
 import subprocess
 import sys
 
+from .helpers import user_names
+
 def add(user_info):
     print(f"Adding user '{user_info['name']}'")
     try:
@@ -58,7 +60,3 @@ def sync(users, existing_user_names=None):
 
 def _groups_str(user_info):
     return ','.join(user_info['groups'] or [])
-
-def _user_names():
-    return [user.pw_name for user in pwd.getpwall()
-            if user.pw_uid >= 1000 and 'home' in user.pw_dir]
